@@ -1,0 +1,14 @@
+/* General CSS Styling */
+body{
+    background-color: #383F51;
+}
+/* Header CSS Styling */
+header h1{
+    background-color: #3C4F76;
+    text-align: center;
+}
+/* Main CSS Styling */
+main{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
