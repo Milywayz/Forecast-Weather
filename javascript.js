@@ -7,7 +7,8 @@ let searchCity = document.querySelector('#searchCity')
 
 
 
-// Add eventLisnter 
+// Add addEventListener
+// ClassRepo unit-6 08 parse_JSON
 
 
 

@@ -11,4 +11,13 @@ header h1{
 main{
     display: grid;
     grid-template-columns: 1fr 3fr;
+    text-align: center;
+}
+ul button{
+    background-color: #AB9F9D;
+    text-align: center;
+    margin: 20px;
+    border-radius: 10px;
+    width: 100%;
+    font-size: 25px;
 }
