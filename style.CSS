@@ -24,7 +24,12 @@ ul button{
 }
 .card{
     margin: auto;
-    justify-content: center;
+    display: flex;
+    justify-content: flex-end;
+    width: 250px;
+}
+.card-body{
+    
 }
 
 
