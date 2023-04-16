@@ -1,5 +1,8 @@
 let searchButton = document.querySelector('#searchButton')
 let searchCity = document.querySelector('#searchCity')
+let cityTemp1 = document.querySelectorAll('.card-title')
+let cityWind1 = document.querySelectorAll('.card-subtitle')
+let cityHumidity1 = document.querySelectorAll('.card-text')
 
 
 
@@ -7,16 +10,16 @@ let searchCity = document.querySelector('#searchCity')
 
 
 
-// Add addEventListener
-// ClassRepo unit-6 08 parse_JSON
+
 
 
 
 // searchButton.addEventListener('click' , function(){
     
-
+//     let searchCityVal = searchCity.value
+//     let inputCity = searchCityVal
     let inputCity = "Dallas"
-    // localStorage.setItem("savedCity", inputCity)
+    
 
 
 
@@ -25,43 +28,60 @@ let searchCity = document.querySelector('#searchCity')
         .then(cityFound => {
     
             let firstCity = cityFound[0];
-            // console.log(firstCity.lat);
-            // console.log(firstCity.lon);
-            // console.log(cityFound);
+           
     
-            return fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${firstCity.lat}&lon=${firstCity.lon}&appid=c59796062f55d4612d60a1d4b41769ea`)
+            return fetch(`http://api.openweathermap.org/data/2.5/forecast?&units=imperial&lat=${firstCity.lat}&lon=${firstCity.lon}&appid=c59796062f55d4612d60a1d4b41769ea`)
         })
     
         .then(response => response.json())
         .then(cityInfo => {
-        
+        console.log(cityInfo)
         let cityList = cityInfo.list
         console.log(cityInfo);
         console.log(cityInfo.city.name)
+            
         let cityName = document.createElement('h2')
         cityName.textContent = cityInfo.city.name
         divContainer.appendChild(cityName)
 
-            for (let i = 0; i < cityList.length; i+=8) {
-                
-                let cityTemp = document.createElement('p')
+        let cityTemp = document.createElement('p')
                 let cityWind = document.createElement('p')
                 let cityHumidity = document.createElement('p')
 
-                cityTemp.textContent = cityList[i].main.temp
-                cityWind.textContent = cityList[i].wind.speed
-                cityHumidity.textContent = cityList[i].weather
+                cityTemp.textContent = "Temp: " + cityList[0].main.temp + "F"
+                cityWind.textContent = "Wind Speed: " +cityList[0].wind.speed
+                cityHumidity.textContent = "Humidity: " +cityList[0].main.humidity + "%"
+
 
                 divContainer.appendChild(cityTemp)
                 divContainer.appendChild(cityWind)
                 divContainer.appendChild(cityHumidity)
+
+            for (let i = 0; i < cityList.length; i+=8) {
                 
+                // let cityTemp = document.createElement('p')
+                // let cityWind = document.createElement('p')
+                // let cityHumidity = document.createElement('p')
+
+                // cityTemp.textContent = cityList[i].main.temp
+                // cityWind.textContent = cityList[i].wind.speed
+                // cityHumidity.textContent = cityList[i].main.humidity
+        
+
+                cityTemp1.textContent = "Temp: " + cityList[i].main.temp + "F"
+                cityWind.textContent = "Wind Speed: " +cityList[i].wind.speed
+                cityHumidity1.textContent = "Humidity: " +cityList[i].main.humidity + "%"
+                //cardBody.textContent = moment(cityList[i], "X").format("MM/DD/YYYY HH:mm:ss") 
+
+               
+
+                // divContainer.appendChild(cityWind)
+                // divContainer.appendChild(cityHumidity)
+                
+
+
             }
             
-    
-    
-    
-    
     
     })
 // })
