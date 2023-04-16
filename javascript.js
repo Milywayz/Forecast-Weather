@@ -19,7 +19,7 @@ let allCities = [];
 //     let inputCity = searchCityVal
     let inputCity = "Dallas"
     function storage(){
-        const cities = localStorage.getItem("inputCity")
+        let cities = localStorage.getItem("inputCity")
 
         if (cities != null){
             let citesParsed = JSON.parse(cities)
@@ -35,10 +35,10 @@ let allCities = [];
     }
     function displayCities() {
 
-        const cities = localStorage.getItem("inputCity")
+        let cities = localStorage.getItem("inputCity")
         if(cities == null) return; 
 
-        const parsedCities = JSON.parse(cities)
+        let parsedCities = JSON.parse(cities)
         for (let i = 0; i < parsedCities.length; i++) {
             
             
@@ -67,7 +67,7 @@ let allCities = [];
             
         let cityName = document.querySelector('#cityName')
         cityName.textContent = cityInfo.city.name
-        // divContainer.appendChild(cityName)
+        
 
         let todaysDate = document.querySelector('.todaysDate')
         todaysDate.textContent = dayjs().format('MMM DD, YYYY')
@@ -112,10 +112,22 @@ let allCities = [];
                 cardSubtitle.classList.add('card-subtitle')
                 cardSubtitle.textContent = "Temp: " + cityList[0].main.temp + "F"
 
+                let mb2 = document.createElement('h5')
+                mb2.classList.add('mb-2')
+                mb2.textContent =  "Wind Speed: " +cityList[0].wind.speed
 
-                cards.appendChild(cardSubtitle)
-                cards.appendChild(cardBody)
+                let cardText = document.createElement('h5')
+                cardText.classList.add('card-text')
+                cardText.textContent = "Humidity: " +cityList[0].main.humidity + "%"
+
+
+
+
                 cards.appendChild(titleCard)
+                cards.appendChild(cardSubtitle)
+                cards.appendChild(cardText)
+                cards.appendChild(cardBody)
+                cards.appendChild(mb2)
                 weather.appendChild(cards)
 
                 // console.log(cityTemp1)
