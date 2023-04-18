@@ -1,3 +1,4 @@
+// Global Variables
 let searchButton = document.querySelector('#searchButton')
 let searchCity = document.querySelector('#searchCity')
 let cityTemp1 = document.querySelectorAll('.card-title')
@@ -13,13 +14,13 @@ let ul = document.querySelector('.showPastCities')
 
 
 
-
+// Search City Input
 searchButton.addEventListener('click' , function(){
     
-    
+    // Getting the value of what you search
     let searchCityVal = searchCity.value
     let inputCity = searchCityVal
-    // let inputCity = "Dallas"
+   // Storing input city into strings
     function storage(){
         let cities = localStorage.getItem("inputCity")
         
@@ -36,6 +37,7 @@ searchButton.addEventListener('click' , function(){
         
         
     }
+    // Displaying your local storage
     function displayCities() {
         
         let cities = localStorage.getItem("inputCity")
@@ -56,13 +58,13 @@ searchButton.addEventListener('click' , function(){
             ul.appendChild(liCities)
         }
     }
-    
+    // Calling Functions
     storage();
     displayCities();
     searchWeather(inputCity);
     function searchWeather(inputCity){
         
-    
+    // Fetching information from the APIs
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${inputCity}&limit=5&appid=c59796062f55d4612d60a1d4b41769ea`)
         .then(response => response.json())
         .then(cityFound => {
@@ -75,11 +77,9 @@ searchButton.addEventListener('click' , function(){
     
         .then(response => response.json())
         .then(cityInfo => {
-        console.log(cityInfo)
+        
+        //Div Container Display
         let cityList = cityInfo.list
-        console.log(cityInfo);
-        console.log(cityInfo.city.name)
-            
         let cityName = document.querySelector('#cityName')
         cityName.textContent = cityInfo.city.name
         
@@ -105,7 +105,9 @@ searchButton.addEventListener('click' , function(){
                 divContainer.appendChild(cityTemp)
                 divContainer.appendChild(cityWind)
                 divContainer.appendChild(cityHumidity)
-            weather.innerHTML =""
+                weather.innerHTML =""
+
+            // Card Display
             for (let i = 0; i < cityList.length; i+=8) {
                 
                 let cityTemp = document.createElement('p')

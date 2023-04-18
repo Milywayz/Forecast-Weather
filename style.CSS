@@ -27,10 +27,13 @@ ul button{
     display: flex;
     justify-content: flex-end;
     width: 250px;
+    background-color: #AB9F9D;
 }
 .weather {
     display: flex;
 }
-
+.center{
+    text-align: center;
+}
 
     
