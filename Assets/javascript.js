@@ -65,14 +65,14 @@ searchButton.addEventListener('click' , function(){
     function searchWeather(inputCity){
         
     // Fetching information from the APIs
-    fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${inputCity}&limit=5&appid=c59796062f55d4612d60a1d4b41769ea`)
+    fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${inputCity}&limit=5&appid=c59796062f55d4612d60a1d4b41769ea`)
         .then(response => response.json())
         .then(cityFound => {
     
             let firstCity = cityFound[0];
            
     
-            return fetch(`http://api.openweathermap.org/data/2.5/forecast?&units=imperial&lat=${firstCity.lat}&lon=${firstCity.lon}&appid=c59796062f55d4612d60a1d4b41769ea`)
+            return fetch(`https://api.openweathermap.org/data/2.5/forecast?&units=imperial&lat=${firstCity.lat}&lon=${firstCity.lon}&appid=c59796062f55d4612d60a1d4b41769ea`)
         })
     
         .then(response => response.json())
