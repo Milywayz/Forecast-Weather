@@ -28,8 +28,8 @@ ul button{
     justify-content: flex-end;
     width: 250px;
 }
-.card-body{
-    
+.weather {
+    display: flex;
 }
 
 

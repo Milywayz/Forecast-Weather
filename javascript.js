@@ -20,41 +20,48 @@ searchButton.addEventListener('click' , function(){
     let searchCityVal = searchCity.value
     let inputCity = searchCityVal
     // let inputCity = "Dallas"
-    // function storage(){
-    //     let cities = localStorage.getItem("inputCity")
+    function storage(){
+        let cities = localStorage.getItem("inputCity")
         
-    //     if (cities != null){
-    //         let citesParsed = JSON.parse(cities)
-    //         citesParsed.push(inputCity)
-    //         localStorage.setItem('inputCity' , JSON.stringify(citesParsed))
-    //     }
-    //     else {
-            
-    //         localStorage.setItem('inputCity' , JSON.stringify(inputCity))
-    //     }
+        if (cities != null){
+            let citesParsed = JSON.parse(cities)
+            citesParsed.push(inputCity)
+            localStorage.setItem('inputCity' , JSON.stringify(citesParsed))
+        }
+        else {
+            let citiesAll = [];
+            citiesAll.push(inputCity)
+            localStorage.setItem('inputCity' , JSON.stringify(citiesAll))
+        }
         
         
-    // }
-    // function displayCities() {
+    }
+    function displayCities() {
         
-    //     let cities = localStorage.getItem("inputCity")
-    //     if(cities == null) return; 
-        
-    //     let parsedCities = JSON.parse(cities)
-    //     for (let i = 0; i < parsedCities.length; i++) {
+        let cities = localStorage.getItem("inputCity")
+        if(cities == null) return; 
+        ul.innerHTML = ""
+        let parsedCities = JSON.parse(cities)
+        for (let i = 0; i < parsedCities.length; i++) {
             
-    //         let liCities = document.createElement('button')
+            let liCities = document.createElement('button')
             
-    //         liCities.textContent = parsedCities[i]
+            liCities.textContent = parsedCities[i]
+            liCities.addEventListener("click" , function(event){
+                searchWeather(event.target.innerText)
+
+
+            })
             
-            
-    //         ul.appendChild(liCities)
-    //     }
-    // }
+            ul.appendChild(liCities)
+        }
+    }
     
-    // storage();
-    // displayCities();
-    
+    storage();
+    displayCities();
+    searchWeather(inputCity);
+    function searchWeather(inputCity){
+        
     
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${inputCity}&limit=5&appid=c59796062f55d4612d60a1d4b41769ea`)
         .then(response => response.json())
@@ -76,76 +83,80 @@ searchButton.addEventListener('click' , function(){
         let cityName = document.querySelector('#cityName')
         cityName.textContent = cityInfo.city.name
         
-
+    
         let todaysDate = document.querySelector('.todaysDate')
         todaysDate.textContent = dayjs().format('MMM DD, YYYY')
         
-
-
+    
+    
         let cityTemp = document.createElement('p')
                 let cityWind = document.createElement('p')
                 let cityHumidity = document.createElement('p')
-
+    
                 cityTemp.textContent = "Temp: " + cityList[0].main.temp + "°F"
                 cityWind.textContent = "Wind Speed: " +cityList[0].wind.speed + "MPH"
                 cityHumidity.textContent = "Humidity: " +cityList[0].main.humidity + "%"
 
-
+                let cardImageDiv = document.createElement('img')
+                cardImageDiv.classList.add('card-Image')
+                cardImageDiv.src = `https://openweathermap.org/img/wn/${cityList[0].weather[0].icon}.png`
+    
+                divContainer.appendChild(cardImageDiv)
                 divContainer.appendChild(cityTemp)
                 divContainer.appendChild(cityWind)
                 divContainer.appendChild(cityHumidity)
-
+            weather.innerHTML =""
             for (let i = 0; i < cityList.length; i+=8) {
                 
                 let cityTemp = document.createElement('p')
                 let cityWind = document.createElement('p')
                 let cityHumidity = document.createElement('p')
     
-
+    
                 cityTemp.textContent = cityList[i].main.temp
                 cityWind.textContent = cityList[i].wind.speed
                 cityHumidity.textContent = cityList[i].main.humidity
-
+    
                 let cards = document.createElement('div')
                 cards.classList.add('card')
         
                 let cardBody = document.createElement('div')
                 cardBody.classList.add('card-body')
-
+    
                 let titleCard = document.createElement('h5')
                 titleCard.classList.add('card-title')
                 titleCard.textContent = dayjs(cityList[i].dt_txt).format('MMM DD, YYYY')
-
+    
                 let cardSubtitle = document.createElement('h5')
                 cardSubtitle.classList.add('card-subtitle')
                 cardSubtitle.textContent = "Temp: " + cityList[i].main.temp + "°F"
-
+    
                 let mb2 = document.createElement('h5')
                 mb2.classList.add('mb-2')
                 mb2.textContent =  "Wind Speed: " + cityList[i].wind.speed + "MPH"
-
+    
                 let cardText = document.createElement('h5')
                 cardText.classList.add('card-text')
                 cardText.textContent = "Humidity: " + cityList[i].main.humidity + "%"
-
-                let cardLink = document.createElement('h5')
-                cardLink.classList.add('card-link')
-                cardLink.textContent = "Skys: " + cityList[i].weather[0].main
-
+    
+                let cardImage = document.createElement('img')
+                cardImage.classList.add('card-Image')
+                cardImage.src = `https://openweathermap.org/img/wn/${cityList[i].weather[0].icon}.png`
+    
                 cards.appendChild(titleCard)
-                cards.appendChild(cardLink)
+                cards.appendChild(cardImage)
                 cards.appendChild(cardSubtitle)
                 cards.appendChild(cardText)
                 cards.appendChild(mb2)
                 cards.appendChild(cardBody)
                 weather.appendChild(cards)
-
+    
                 
             } 
             
     
     })
-})
+}})
 
 
 
