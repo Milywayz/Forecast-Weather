@@ -16,7 +16,7 @@ N/A
 
 ## Usage
 
-![Alt text](./assets/Forecast-Image.png)
+![Alt text](./Assets/Forecast-Image.png)
 
    
 ## License
